@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Tweet Search</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+
+<div class="wrapper">
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="dist/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">SVCube</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+          <li class="nav-item">
+            <a href="#" class="nav-link" onclick="viewAnalytics();">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Analytics
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link" onclick="viewNewsArticles();">
+              <i class="nav-icon fas fa-envelope"></i>
+              <p>
+                News Articles
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link" onclick="viewSearch();">
+              <i class="nav-icon fas fa-search"></i>
+              <p>
+                Search
+              </p>
+            </a>
+          </li>
+
+          <section id="facets">
+            <li class="nav-header">FILTERS</li>
+
+            <li class="nav-item has-treeview">
+
+              <a href="#" class="nav-link">
+                <p>
+                  POI
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+
+              <ul class="nav nav-treeview" id="poi-facets"></ul>
+            </li>
+
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <p>
+                  Country
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                
+                  <li class="nav-item">
+                      <div class="form-check nav-link" style="padding-left:50px">
+                            <input id="country-facets-chk-0" data-id="country" data-value="USA" onchange="checkBoxChange(this)"
+                            class="form-check-input" type="checkbox">
+                            <label class="form-check-label" for="country-facets-chk-0">
+                              USA
+                            </label>
+                      </div>
+                  </li>
+
+                  <li class="nav-item">
+                      <div class="form-check nav-link" style="padding-left:50px">
+                            <input id="country-facets-chk-1" data-id="country" data-value="India" onchange="checkBoxChange(this)"
+                            class="form-check-input" type="checkbox">
+                            <label class="form-check-label" for="country-facets-chk-1">
+                              India
+                            </label>
+                      </div>
+                  </li>
+
+                  <li class="nav-item">
+                      <div class="form-check nav-link" style="padding-left:50px">
+                            <input id="country-facets-chk-2" data-id="country" data-value="Brazil" onchange="checkBoxChange(this)"
+                            class="form-check-input" type="checkbox">
+                            <label class="form-check-label" for="country-facets-chk-2">
+                              Brazil
+                            </label>
+                      </div>
+                  </li>
+
+              </ul>
+            </li>
+
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <p>
+                  Language
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+
+                <li class="nav-item">
+                    <div class="form-check nav-link" style="padding-left:50px">
+                          <input id="language-facets-chk-0" data-id="lang" data-value="en" onchange="checkBoxChange(this)"
+                          class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="language-facets-chk-0">
+                            English
+                          </label>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <div class="form-check nav-link" style="padding-left:50px">
+                          <input id="language-facets-chk-1" data-id="lang" data-value="hi" onchange="checkBoxChange(this)"
+                          class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="language-facets-chk-1">
+                            Hindi
+                          </label>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <div class="form-check nav-link" style="padding-left:50px">
+                          <input id="language-facets-chk-2" data-id="lang" data-value="pt" onchange="checkBoxChange(this)"
+                          class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="language-facets-chk-2">
+                            Portuguese
+                          </label>
+                    </div>
+                </li>
+
+              </ul>
+            </li>
+
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <p>
+                  Sentiment
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+
+                <li class="nav-item">
+                    <div class="form-check nav-link" style="padding-left:50px">
+                          <input id="sentiment-facets-chk-0" data-id="sentiment" data-value="Positive" onchange="checkBoxChange(this)"
+                          class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="sentiment-facets-chk-0">
+                            Positive
+                          </label>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <div class="form-check nav-link" style="padding-left:50px">
+                          <input id="sentiment-facets-chk-1" data-id="sentiment" data-value="Negative" onchange="checkBoxChange(this)"
+                          class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="sentiment-facets-chk-1">
+                            Negative
+                          </label>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <div class="form-check nav-link" style="padding-left:50px">
+                          <input id="sentiment-facets-chk-2" data-id="sentiment" data-value="Neutral" onchange="checkBoxChange(this)"
+                          class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="sentiment-facets-chk-2">
+                            Neutral
+                          </label>
+                    </div>
+                </li>
+
+              </ul>
+            </li>
+
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <p>
+                  Topic
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+
+                  <li class="nav-item">
+                      <div class="form-check nav-link" style="padding-left:50px">
+                            <input id="topic-facets-chk-0" data-id="topic" data-value="Crime" onchange="checkBoxChange(this)"
+                            class="form-check-input" type="checkbox">
+                            <label class="form-check-label" for="topic-facets-chk-0">
+                              Crime
+                            </label>
+                      </div>
+                  </li>
+
+                  <li class="nav-item">
+                      <div class="form-check nav-link" style="padding-left:50px">
+                            <input id="topic-facets-chk-1" data-id="topic" data-value="Education" onchange="checkBoxChange(this)"
+                            class="form-check-input" type="checkbox">
+                            <label class="form-check-label" for="topic-facets-chk-1">
+                              Education
+                            </label>
+                      </div>
+                  </li>
+
+                  <li class="nav-item">
+                      <div class="form-check nav-link" style="padding-left:50px">
+                            <input id="topic-facets-chk-2" data-id="topic" data-value="Environment" onchange="checkBoxChange(this)"
+                            class="form-check-input" type="checkbox">
+                            <label class="form-check-label" for="topic-facets-chk-2">
+                              Environment
+                            </label>
+                      </div>
+                  </li>
+
+                  <li class="nav-item">
+                      <div class="form-check nav-link" style="padding-left:50px">
+                            <input id="topic-facets-chk-3" data-id="topic" data-value="Politics" onchange="checkBoxChange(this)"
+                            class="form-check-input" type="checkbox">
+                            <label class="form-check-label" for="topic-facets-chk-3">
+                              Politics
+                            </label>
+                      </div>
+                  </li>
+
+                  <li class="nav-item">
+                      <div class="form-check nav-link" style="padding-left:50px">
+                            <input id="topic-facets-chk-4" data-id="topic" data-value="General" onchange="checkBoxChange(this)"
+                            class="form-check-input" type="checkbox">
+                            <label class="form-check-label" for="topic-facets-chk-4">
+                              General
+                            </label>
+                      </div>
+                  </li>
+
+              </ul>
+            </li>
+          </section>
+          
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Search Content Wrapper. Contains page content -->
+  <div class="content-wrapper" id="search-content">
+    <!-- Content Header (Page header) -->
+    <div class="content-header" >
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-lg-6 offset-lg-3">
+            <div class="input-group" style="margin-top:30px">
+              <input type="text" name="message" placeholder="Type Search Query ..." class="form-control" id="tweet-query">
+              <span class="input-group-append">
+                <button type="button" class="btn btn-primary" id="search-tweets-button">Search Tweets</button>
+              </span>
+            </div>
+          </div>
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+
+    <div class="search-body">
+        <table id="tweet-table"></table>
+    </div>
+
+  </div>
+  <!-- /. Search content-wrapper -->
+
+  <div class="content-wrapper" id="kibana-content">
+  	<iframe src="http://34.221.119.120:5601/app/kibana#/dashboard/52014090-17d8-11ea-a577-112897aeb95c?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-1y%2Cto%3Anow))" height="1500" width="1250"></iframe>
+  </div>
+
+  <div class="content-wrapper" id="news-content">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-lg-6 offset-lg-3">
+              <div class="input-group" style="margin-top: 30px">
+                <input type="text" name="message" placeholder="Type Search Query ..." class="form-control" id="news-query">
+                <span class="input-group-append">
+                  <button type="button" class="btn btn-primary" id="search-news-button">Search News Articles</button>
+                </span>
+              </div>
+            </div>
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+  
+      <div class="search-body">
+          <table id="news-table"></table>
+      </div>
+  
+    </div>
+
+
+</div>
+<!-- ./wrapper -->
+
+
+
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+<!-- Latest compiled and minified Locales -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/locale/bootstrap-table-en-US.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/custom.js"></script>
+<script src="dist/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+</body>
+</html>
